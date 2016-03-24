@@ -1,0 +1,2 @@
+# ard
+hardware mode
