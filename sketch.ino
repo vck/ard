@@ -1,20 +1,34 @@
-const int LED = 13;
+String readData;
 
-void setup(){
+void setup()
+{
     Serial.begin(9600);
-    pinMode(LED, OUTPUT);
+    pinMode(13, OUTPUT);
+    Serial.print("initializing...");
 }
 
-void loop(){
-    String perintah = "";
-    while(Serial.available() >0){
-        char karakter = Serial.read();
-        perintah = perintah+karakter;
-
+void loop()
+{
+    while(!Serial.available()){}
+    // wait until serial com detected 
+    while(Serial.available()){
+        if (Serial.available() > 0)
+        {
+            delay(30); 
+            char data = Serial.read();
+            readData = readData + data;
+        }
     }
-    if (perintah.equals(""))
-        return;
-    Serial.println(perintah);
-    digitalWrite(LED, HIGH);
+
+    if(readData.length() > 0){
+        if(readData == "up"){
+          digitalWrite(13, HIGH);
+        }
+        
+        if(readData == "low"){
+          digitalWrite(13, LOW);
+        }
+        readData = ""; // empty contained data
+    }
 }
 
