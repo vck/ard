@@ -1,5 +1,5 @@
 # How to run
-```shell
+```sh
 $ python app.py
 $ python -m SimpleHTTPServer 8080
 ```
